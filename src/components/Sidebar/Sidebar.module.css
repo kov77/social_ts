@@ -1,0 +1,16 @@
+.nav {
+    grid-area: nav;
+}
+.item {
+    margin-top: 3px;
+}
+.item a {
+    color: #000;
+    text-decoration: none;
+
+}
+
+.item a:hover {
+    font-weight: bold;
+
+}

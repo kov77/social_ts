@@ -1,0 +1,10 @@
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.item img:hover {
+    cursor: pointer;
+    border: #36ff36 5px solid;
+}
