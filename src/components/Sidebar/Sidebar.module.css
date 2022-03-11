@@ -10,6 +10,11 @@
 
 }
 
+.item a.active {
+    color: darkblue;
+    font-weight: bold;
+}
+
 .item a:hover {
     font-weight: bold;
 
