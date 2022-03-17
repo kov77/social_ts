@@ -2,8 +2,21 @@ import classes from './MyPosts.module.css';
 import React from "react";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-    return(
+export type myPostPropsType = {
+    postData: postDataArr[]
+}
+
+type postDataArr = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+const MyPosts = (props: myPostPropsType) => {
+
+
+
+    return (
         <div>
             <div>
                 <div>
@@ -12,9 +25,7 @@ const MyPosts = () => {
                     <button>REMOVE POST</button>
                 </div>
             </div>
-            <Post message={'Hi, how are you?'} likesCount={15}/>
-            <Post message={'It"s my first post!'} likesCount={10}/>
-
+            {props.postData.map(el => <Post message={el.message} likesCount={el.likesCount}/>)}
         </div>
     )
 }
