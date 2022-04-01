@@ -1,7 +1,8 @@
 import classes from '././Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import React from "react";
+import React, {ChangeEvent} from "react";
+import {addMessage, changeDialogsText} from "../../redux/state";
 
 type dialogsArr = {
     id: string
@@ -16,6 +17,9 @@ type messagesArr = {
 export type dialogsPropsType = {
     dialogs: dialogsArr[]
     messages: messagesArr[]
+    addMessage: () => void
+    changeDialogsText: (value: string) => void
+    messageText: string
 }
 
 const Dialogs = (props: dialogsPropsType) => {
@@ -23,8 +27,11 @@ const Dialogs = (props: dialogsPropsType) => {
     let textFromArea: any = React.createRef();
 
     const onClickHandler = () => {
-        let postText = textFromArea.current.value
-        alert(postText)
+        addMessage()
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        changeDialogsText(e.currentTarget.value)
     }
 
 
@@ -35,7 +42,7 @@ const Dialogs = (props: dialogsPropsType) => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>{dialogsElement}</div>
             <div className={classes.messages}>{messagesElement}</div>
-            <textarea ref={textFromArea}></textarea>
+            <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
             <button onClick={onClickHandler}>Add text</button>
         </div>
     )
