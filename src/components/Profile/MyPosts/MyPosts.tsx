@@ -30,13 +30,17 @@ const MyPosts = (props: myPostPropsType) => {
         props.changPostText(postValue)
     }
 
+    const removeBtnHandler = () => {
+        props.changPostText('')
+    }
+
     return (
         <div>
             <div>
                 <div>
                     <textarea onChange={newPostTextHandler} ref={newPostElement} value={props.newPostText}></textarea>
                     <button onClick={onClickBtnHandler}>ADD POST</button>
-                    <button>REMOVE POST</button>
+                    <button onClick={removeBtnHandler}>REMOVE POST</button>
                 </div>
             </div>
             {props.postData.map(el => <Post message={el.message} likesCount={el.likesCount}/>)}
