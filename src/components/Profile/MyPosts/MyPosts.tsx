@@ -1,14 +1,24 @@
 import classes from './MyPosts.module.css';
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
+import {actionType} from "../../../redux/state";
+
+
+
 
 
 export type myPostPropsType = {
     postData: postDataArr[]
-    addPost: () => void
+    dispatch: (action: actionType) => void
     newPostText: string
-    changPostText: (value: string) => void
 }
+
+// export type myPostPropsType = {
+//     postData: postDataArr[]
+//     addPost: () => void
+//     newPostText: string
+//     changPostText: (value: string) => void
+// }
 
 type postDataArr = {
     id: number
@@ -21,17 +31,18 @@ const MyPosts = (props: myPostPropsType) => {
     const newPostElement: any = React.createRef()
 
     const onClickBtnHandler = () => {
-        props.addPost()
-        newPostElement.current.value= ''
+        props.dispatch({type: "ADD-POST", value: newPostElement.current.value})
+        value: newPostElement.current.value = ''
+
     }
 
     const newPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postValue = e.currentTarget.value
-        props.changPostText(postValue)
+        props.dispatch({type: "CHANGE-POST-TEXT", value: postValue})
     }
 
     const removeBtnHandler = () => {
-        props.changPostText('')
+        props.dispatch({type: "CHANGE-POST-TEXT", value: ''})
     }
 
     return (
@@ -43,7 +54,7 @@ const MyPosts = (props: myPostPropsType) => {
                     <button onClick={removeBtnHandler}>REMOVE POST</button>
                 </div>
             </div>
-            {props.postData.map(el => <Post message={el.message} likesCount={el.likesCount}/>)}
+            {props.postData.map((el, index) => <Post key={index} message={el.message} likesCount={el.likesCount}/>)}
         </div>
     )
 }

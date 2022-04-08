@@ -2,6 +2,7 @@ import classes from '././Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import React, {ChangeEvent} from "react";
+import {actionType} from "../../redux/state";
 
 type dialogsArr = {
     id: string
@@ -16,8 +17,7 @@ type messagesArr = {
 export type dialogsPropsType = {
     dialogs: dialogsArr[]
     messages: messagesArr[]
-    addMessage: () => void
-    changeDialogsText: (value: string) => void
+    dispatch: (action: actionType) => void
     messageText: string
 }
 
@@ -26,16 +26,16 @@ const Dialogs = (props: dialogsPropsType) => {
     let textFromArea: any = React.createRef();
 
     const onClickHandler = () => {
-        props.addMessage()
+        props.dispatch({type: "ADD-MESSAGE", value: props.messageText})
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeDialogsText(e.currentTarget.value)
+        props.dispatch({type: "CHANGE-DIALOGS-TEXT", value: e.currentTarget.value})
     }
 
 
-    const dialogsElement = props.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
-    const messagesElement = props.messages.map(el => <Message message={el.message}/>)
+    const dialogsElement = props.dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
+    const messagesElement = props.messages.map(el => <Message key={el.id}  message={el.message}/>)
 
     return (
         <div className={classes.dialogs}>
