@@ -3,6 +3,12 @@ export type actionType = {
     type: 'ADD-POST' | 'ADD-MESSAGE' | 'CHANGE-POST-TEXT' | 'CHANGE-DIALOGS-TEXT'
     value: string | ''
 }
+
+export const addPostActionCreator = (value: string): actionType => ({type: "ADD-POST", value})
+export const changePostTexttActionCreator = (postValue: string): actionType => ({type: "CHANGE-POST-TEXT", value: postValue})
+export const addMessageActionCreator = (text: string): actionType => ({type: "ADD-MESSAGE", value: text})
+export const changeDialogsTexttActionCreator = (newValue: string): actionType => ({type: "CHANGE-DIALOGS-TEXT", value: newValue})
+
 const store = {
     _state: {
         profilePage: {
@@ -63,17 +69,9 @@ const store = {
                 _callSubscriber()
             }
         }
+
     },
 
-
-    // changPostText(value: string) {
-    //     this._state.profilePage.newPostText = value;
-    //     _callSubscriber()
-    // },
-    // changeDialogsText(value: string) {
-    //     this._state.dialogsPage.messageText = value
-    //     _callSubscriber()
-    // },
 
 
 
