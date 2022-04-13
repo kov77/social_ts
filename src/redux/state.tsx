@@ -1,8 +1,13 @@
-let _callSubscriber = () => {}
+import {dialogsReducer} from "./dialogs-reducer";
+import {profileReducer} from "./profile-reducer";
+
+export let _callSubscriber = () => {}
 export type actionType = {
     type: 'ADD-POST' | 'ADD-MESSAGE' | 'CHANGE-POST-TEXT' | 'CHANGE-DIALOGS-TEXT'
     value: string | ''
 }
+
+export type reducerType = (state: any, action: actionType) => void
 
 export const addPostActionCreator = (value: string): actionType => ({type: "ADD-POST", value})
 export const changePostTexttActionCreator = (postValue: string): actionType => ({type: "CHANGE-POST-TEXT", value: postValue})
@@ -46,29 +51,10 @@ const store = {
     },
 
     dispatch(action: actionType) {
-        if(action.type === 'ADD-POST') {
-            {
-                this._state.profilePage.postData.push({id: this._state.dialogsPage.messages.length + 1, message: this._state.profilePage.newPostText, likesCount: 0})
-                this._state.profilePage.newPostText = ''
-                _callSubscriber()
-            }
-        } else if(action.type === 'ADD-MESSAGE') {
-            {
-                this._state.dialogsPage.messages.push({id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.messageText})
-                this._state.dialogsPage.messageText = ''
-                _callSubscriber()
-            }
-        } else if(action.type === 'CHANGE-POST-TEXT') {
-            {
-                this._state.profilePage.newPostText = action.value;
-                _callSubscriber()
-            }
-        } else if(action.type === 'CHANGE-DIALOGS-TEXT') {
-            {
-                this._state.dialogsPage.messageText = action.value
-                _callSubscriber()
-            }
-        }
+        profileReducer(this._state, action)
+        dialogsReducer(this._state, action)
+        _callSubscriber()
+
 
     },
 
