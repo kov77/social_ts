@@ -2,7 +2,7 @@ import classes from '././Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import React, {ChangeEvent} from "react";
-import {actionType, addMessageActionCreator, changeDialogsTexttActionCreator} from "../../redux/state";
+import {actionType, addMessageActionCreator, changeDialogsTexttActionCreator} from "../../redux/store";
 
 type dialogsArr = {
     id: string
@@ -43,8 +43,10 @@ const Dialogs = (props: dialogsPropsType) => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>{dialogsElement}</div>
             <div className={classes.messages}>{messagesElement}</div>
-            <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
-            <button onClick={onClickHandler}>Add text</button>
+            <div className={classes.addMessage}>
+                <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
+                <button onClick={onClickHandler}>Add text</button>
+            </div>
         </div>
     )
 }
