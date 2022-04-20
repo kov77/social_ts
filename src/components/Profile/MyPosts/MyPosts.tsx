@@ -1,11 +1,12 @@
 import classes from './MyPosts.module.css';
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
-import {actionType, addPostActionCreator, changePostTexttActionCreator} from "../../../redux/store";
 
 export type myPostPropsType = {
+    addPost: (newValue: string) => void
+    updateNewPostText: (postValue: string) => void
+    removeBtn: () => void
     postData: postDataArr[]
-    dispatch: (action: actionType) => void
     newPostText: string
 }
 
@@ -29,19 +30,17 @@ const MyPosts = (props: myPostPropsType) => {
     const newPostElement: any = React.createRef()
 
     const onClickBtnHandler = () => {
-        props.dispatch(addPostActionCreator(newPostElement.current.value))
+        let newValue = newPostElement.current.value
+        props.addPost(newValue)
         value: newPostElement.current.value = ''
-
     }
 
     const newPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postValue = e.currentTarget.value
-        props.dispatch(changePostTexttActionCreator(postValue))
+        props.updateNewPostText(postValue)
     }
 
-    const removeBtnHandler = () => {
-        props.dispatch({type: "CHANGE-POST-TEXT", value: ''})
-    }
+    const removeBtnHandler = () => props.removeBtn()
 
     return (
         <div>
