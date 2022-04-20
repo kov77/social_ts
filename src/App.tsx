@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 const App = (props: any) => {
@@ -21,10 +22,7 @@ const App = (props: any) => {
                                // newPostText={props.store.getState().profilePage.newPostText}
                                // dispatch={props.store.dispatch.bind(props.store)}
                                element={<Profile store={props.store}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs dialogs={props.store.getState().dialogsPage.dialogs}
-                                                                   messages={props.store.getState().dialogsPage.messages}
-                                                                   dispatch={props.store.dispatch.bind(props.store)}
-                                                                   messageText={props.store.getState().dialogsPage.messageText}/>}/>
+                        <Route path='/dialogs/*' element={<DialogsContainer store={props.store}/>}/>
                         <Route path='/news/*' element={'News'}/>
                         <Route path='/music/*' element={'Music'}/>
                         <Route path='/settings/*' element={'Settings'}/>
