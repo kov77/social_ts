@@ -3,6 +3,7 @@ import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
 import {actionType, addPostActionCreator, changePostTexttActionCreator} from "../../../redux/store";
 import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
 
 export type myPostContainerPropsType = {
     store: any
@@ -23,22 +24,23 @@ type postDataArr = {
 
 
 
-const MyPostsContainer = (props: myPostContainerPropsType) => {
-    let state = props.store.getState()
-    const addPost = (newValue: string) => {
-        props.store.dispatch(addPostActionCreator(newValue))
+
+const mapStateToProps = (state: any) => {
+    return {
+        postData: state.profilePage.postData,
+        newPostText: state.profilePage.newPostText
 
     }
-
-    const updateNewPostText = (postValue: string) => {
-        props.store.dispatch(changePostTexttActionCreator(postValue))
-    }
-
-    const removeBtn = () => {
-        props.store.dispatch({type: "CHANGE-POST-TEXT", value: ''})
-    }
-    return (
-       <MyPosts addPost = {addPost} updateNewPostText={updateNewPostText} removeBtn={removeBtn} postData={state.profilePage.postData} newPostText={state.profilePage.newPostText}/>
-    )
 }
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        addPost: (newValue: string) => dispatch(addPostActionCreator(newValue)),
+        updateNewPostText: (postValue: string) => dispatch(changePostTexttActionCreator(postValue)),
+        removeBtn: dispatch(changePostTexttActionCreator(''))
+    }
+}
+
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps) (MyPosts)
+
 export default MyPostsContainer;

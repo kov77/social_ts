@@ -18,15 +18,14 @@ const initialState = {
 }
 
 export const dialogsReducer: reducerType = (state = initialState, action: actionType) => {
-    if(action.type === 'ADD-MESSAGE') {
-        {
-            state.messages.push({id: state.messages.length + 1, message: state.messageText})
-            state.messageText = ''
+    switch (action.type) {
+        case "ADD-MESSAGE": {
+            let message = {id: state.messages.length + 1, message: state.messageText}
+            return {...state, messages: [...state.messages, message], messageText: ''}
         }
-    } else if(action.type === 'CHANGE-DIALOGS-TEXT') {
-        {
-            state.messageText = action.value
+        case "CHANGE-DIALOGS-TEXT": {
+            return {...state, messageText: action.value}
         }
+        default: return state
     }
-    return state;
 }

@@ -11,15 +11,16 @@ const initialState = {
 }
 
 export const profileReducer: reducerType = (state = initialState, action) => {
-    if(action.type === 'ADD-POST') {
-        {
-            state.postData.push({id: state.postData.length + 1, message: state.newPostText, likesCount: 0})
-            state.newPostText = ''
+
+    switch (action.type) {
+        case "ADD-POST": {
+            let newPost = {id: state.postData.length + 1, message: state.newPostText, likesCount: 0}
+            return {...state, postData: [...state.postData, newPost], newPostText: ''}
         }
-    } else if(action.type === 'CHANGE-POST-TEXT') {
-        {
-            state.newPostText = action.value;
+        case "CHANGE-POST-TEXT": {
+            return {...state, newPostText: action.value}
         }
+        default: return state
     }
-    return state;
+
 }
