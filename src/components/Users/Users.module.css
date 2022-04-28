@@ -1,0 +1,71 @@
+.userWrp {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.profileWrp {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.userBtnGreen {
+    cursor: pointer;
+    font-weight: 900;
+    border-radius: 5px;
+    background-color: #428826;
+
+}
+.userBtnRed {
+    cursor: pointer;
+    font-weight: 900;
+    border-radius: 5px;
+    background-color: #850e0e;
+    color: white;
+}
+
+.userAvatar > img {
+    width: 90px;
+}
+
+.userInfoWrp {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    position: relative;
+}
+
+.userName {
+    color: #606060;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.userStatus {
+    color: #606060;
+    font-weight: 700;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+}
+
+.userLocationWrp {
+    position: absolute;
+    right: 10px;
+    text-align: right;
+}
+
+.userCountry {
+    color: #606060;
+    margin-bottom: 3px;
+}
+
+.userCity {
+    color: #7a7777;
+    font-weight: bold;
+    font-size: 14px;
+}
