@@ -70,3 +70,20 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageNumber {
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 0 2px 0 2px;
+   font-size: 12px;
+}
+.pageNumber:hover {
+    background-color: rgba(0,0,0, 0.7);
+    font-size: 14px;
+    border-radius: 50%;
+    color: white;
+}

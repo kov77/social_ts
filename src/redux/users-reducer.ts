@@ -1,6 +1,9 @@
 
 const initialState = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 type userLocationType = {
     city: string
@@ -21,14 +24,18 @@ export type userType = {
     location: userLocationType
 }
 export type usersType = Array<userType>
-type userReducerActionType = followType | unfollowType | setUsersType
+type userReducerActionType = followType | unfollowType | setUsersType | setCurrentPageType | setTotalCountType
 type followType = ReturnType<typeof followAC>
 type unfollowType = ReturnType<typeof unfollowAC>
 type setUsersType = ReturnType<typeof setUsersAC>
+type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
+type setTotalCountType = ReturnType<typeof setTotalCountAC>
 
 export const followAC = (userId: number) => ({type: "FOLLOW", userId}as const)
 export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
 export const setUsersAC = (users: usersType) => ({type: "SET_USERS", users} as const)
+export const setTotalCountAC = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
+export const setCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
 
 export const usersReducer = (state = initialState, action: userReducerActionType) => {
     switch (action.type) {
@@ -37,7 +44,11 @@ export const usersReducer = (state = initialState, action: userReducerActionType
         case "UNFOLLOW" :
             return {...state, users: [...state.users.map((el: any)  => el.id === action.userId ? {...el, folowed: true} : el)]}
         case "SET_USERS" :
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case "SET_CURRENT_PAGE":
+            return {...state, currentPage: action.currentPage}
+        case "SET_TOTAL_COUNT":
+            return {...state, totalUsersCount: action.count}
         default: return state
     }
 
