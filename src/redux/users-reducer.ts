@@ -3,7 +3,8 @@ const initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 type userLocationType = {
     city: string
@@ -24,18 +25,20 @@ export type userType = {
     location: userLocationType
 }
 export type usersType = Array<userType>
-type userReducerActionType = followType | unfollowType | setUsersType | setCurrentPageType | setTotalCountType
+type userReducerActionType = followType | unfollowType | setUsersType | setCurrentPageType | setTotalCountType | setPreloaderType
 type followType = ReturnType<typeof followAC>
 type unfollowType = ReturnType<typeof unfollowAC>
 type setUsersType = ReturnType<typeof setUsersAC>
 type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
 type setTotalCountType = ReturnType<typeof setTotalCountAC>
+type setPreloaderType = ReturnType<typeof setPreloaderAC>
 
 export const followAC = (userId: number) => ({type: "FOLLOW", userId}as const)
 export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
 export const setUsersAC = (users: usersType) => ({type: "SET_USERS", users} as const)
 export const setTotalCountAC = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
+export const setPreloaderAC = (isFetching: boolean) => ({type: "SET_PRELOADER", isFetching} as const)
 
 export const usersReducer = (state = initialState, action: userReducerActionType) => {
     switch (action.type) {
@@ -49,6 +52,8 @@ export const usersReducer = (state = initialState, action: userReducerActionType
             return {...state, currentPage: action.currentPage}
         case "SET_TOTAL_COUNT":
             return {...state, totalUsersCount: action.count}
+        case "SET_PRELOADER":
+            return {...state, isFetching: action.isFetching}
         default: return state
     }
 
