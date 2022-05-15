@@ -26,19 +26,19 @@ export type userType = {
 }
 export type usersType = Array<userType>
 type userReducerActionType = followType | unfollowType | setUsersType | setCurrentPageType | setTotalCountType | setPreloaderType
-type followType = ReturnType<typeof followAC>
-type unfollowType = ReturnType<typeof unfollowAC>
-type setUsersType = ReturnType<typeof setUsersAC>
-type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
-type setTotalCountType = ReturnType<typeof setTotalCountAC>
-type setPreloaderType = ReturnType<typeof setPreloaderAC>
+type followType = ReturnType<typeof follow>
+type unfollowType = ReturnType<typeof unfollow>
+type setUsersType = ReturnType<typeof setUsers>
+type setCurrentPageType = ReturnType<typeof setCurrentPage>
+type setTotalCountType = ReturnType<typeof setTotalCount>
+type setPreloaderType = ReturnType<typeof setPreloader>
 
-export const followAC = (userId: number) => ({type: "FOLLOW", userId}as const)
-export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
-export const setUsersAC = (users: usersType) => ({type: "SET_USERS", users} as const)
-export const setTotalCountAC = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
-export const setCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
-export const setPreloaderAC = (isFetching: boolean) => ({type: "SET_PRELOADER", isFetching} as const)
+export const follow = (userId: number) => ({type: "FOLLOW", userId}as const)
+export const unfollow = (userId: number) => ({type: "UNFOLLOW", userId} as const)
+export const setUsers = (users: usersType) => ({type: "SET_USERS", users} as const)
+export const setTotalCount = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
+export const setCurrentPage = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
+export const setPreloader = (isFetching: boolean) => ({type: "SET_PRELOADER", isFetching} as const)
 
 export const usersReducer = (state = initialState, action: userReducerActionType) => {
     switch (action.type) {

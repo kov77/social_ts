@@ -1,0 +1,28 @@
+.avatarWrp {
+    position: relative;
+}
+.jobSeeker {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 70px;
+    height: 70px;
+}
+
+.jobSeekerDescr {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.userFullName{
+    color: black;
+    font-weight: bold;
+}
+
+.contacts{
+
+}

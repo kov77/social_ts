@@ -1,4 +1,3 @@
-import { actionType, reducerType} from "./store";
 
 const initialState = {
     dialogs: [
@@ -17,7 +16,12 @@ const initialState = {
     messageText: ''
 }
 
-export const dialogsReducer: reducerType = (state = initialState, action: actionType) => {
+type dialogsReducerType = addMessageACType | hangeDialogsTextACType
+
+type addMessageACType = ReturnType<typeof addMessageActionCreator>
+type hangeDialogsTextACType = ReturnType<typeof changeDialogsTexttActionCreator>
+
+export const dialogsReducer = (state = initialState, action : dialogsReducerType) => {
     switch (action.type) {
         case "ADD-MESSAGE": {
             let message = {id: state.messages.length + 1, message: state.messageText}
@@ -29,3 +33,6 @@ export const dialogsReducer: reducerType = (state = initialState, action: action
         default: return state
     }
 }
+
+export const addMessageActionCreator = (text: string) => ({type: "ADD-MESSAGE", value: text})
+export const changeDialogsTexttActionCreator = (newValue: string) => ({type: "CHANGE-DIALOGS-TEXT", value: newValue})

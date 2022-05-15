@@ -1,16 +1,16 @@
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setPreloaderAC,
-    setTotalCountAC,
-    setUsersAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setPreloader,
+    setTotalCount,
+    setUsers,
+    unfollow
 } from "../../redux/users-reducer";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
-import preloaderImg from "../../assets/images/preloader.gif"
+import {Preloader} from "../Preloader";
 
 class UsersContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -39,7 +39,7 @@ class UsersContainer extends React.Component<any, any> {
     render() {
 
         return <>
-            {this.props.isFetching ? <div><img src={preloaderImg} alt="preloader image"/></div> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users onPageChanged={this.onPageChanged} totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize} currentPage={this.props.currentPage} users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow}/>
         </>
     }
@@ -54,15 +54,5 @@ const mapStateToProps = (state: any) => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        follow: (userId: any) => dispatch(followAC(userId)),
-        unfollow: (userId: any) => dispatch(unfollowAC(userId)),
-        setUsers: (users: any) => dispatch(setUsersAC(users)),
-        setTotalCount: (count: number) => dispatch(setTotalCountAC(count)),
-        setCurrentPage: (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber)),
-        setPreloader: (isFetching: boolean) => dispatch(setPreloaderAC(isFetching))
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps) (UsersContainer)
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setTotalCount, setCurrentPage, setPreloader}) (UsersContainer)

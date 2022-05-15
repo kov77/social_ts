@@ -2,6 +2,7 @@ import classes from "./Users.module.css";
 import {userType} from "../../redux/users-reducer";
 import userPhoto from "../../assets/images/user_avatar.png";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const Users = (props: any) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -17,8 +18,8 @@ const Users = (props: any) => {
         {
             props.users.map((user: userType) => <div className={classes.userWrp} key={user.id}>
                 <div className={classes.profileWrp}>
-                    <div className={classes.userAvatar}><img src={user.photos.small ? user.photos.small : userPhoto}
-                                                             alt="user's avatar"/></div>
+                    <NavLink to={'/profile/' + user.id}><div className={classes.userAvatar}><img src={user.photos.small ? user.photos.small : userPhoto}
+                                                                            alt="user's avatar"/></div></NavLink>
                     {user.folowed
                         ? <button onClick={() => {
                             props.follow(user.id)
