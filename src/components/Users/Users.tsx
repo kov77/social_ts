@@ -1,32 +1,56 @@
 import classes from "./Users.module.css";
-import {userType} from "../../redux/users-reducer";
 import userPhoto from "../../assets/images/user_avatar.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 const Users = (props: any) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
-    for(let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
     return < >
         <div>
-            {pages.map((e, index) => <span key={index} onClick={() => props.onPageChanged(e)} className={`${classes.pageNumber} + ${(props.currentPage === e) ? classes.selectedPage : ""} `}>{e}</span>)}
+            {pages.map((e, index) => <span key={index} onClick={() => props.onPageChanged(e)}
+                                           className={`${classes.pageNumber} + ${(props.currentPage === e) ? classes.selectedPage : ""} `}>{e}</span>)}
 
         </div>
         {
-            props.users.map((user: userType) => <div className={classes.userWrp} key={user.id}>
+            props.users.map((user: any) => <div className={classes.userWrp} key={user.id}>
                 <div className={classes.profileWrp}>
-                    <NavLink to={'/profile/' + user.id}><div className={classes.userAvatar}><img src={user.photos.small ? user.photos.small : userPhoto}
-                                                                            alt="user's avatar"/></div></NavLink>
-                    {user.folowed
-                        ? <button onClick={() => {
-                            props.follow(user.id)
-                        }}>Follow</button>
-                        : <button onClick={() => {
-                            props.unfollow(user.id)
-                        }}>Unfollow</button>}
+                    <div>
+                        <NavLink to={'/profile/' + user.id}>
+                            <div className={classes.userAvatar}>
+                                <img src={user.photos.small ? user.photos.small : userPhoto} alt="user's avatar"/>
+                            </div>
+                        </NavLink>
+                    </div>
+                    <div>
+                        {user.followed
+                            ? <button disabled={props.followingInProgress.some((id:number) => id === user.id)} onClick={() => {
+                                console.log(user)
+                                props.toggleFollowingProgress(true, user.id)
+                                usersAPI.unfollowUser(user.id).then(data => {
+                                if(data.resultCode === 0) {
+
+                                    props.unfollow(user.id);
+                                }
+                                props.toggleFollowingProgress(false, user.id)
+
+                            })
+                            }}>Unfollow</button>
+                            : <button disabled={props.followingInProgress.some((id:number) => id === user.id)}  onClick={() => {
+                                props.toggleFollowingProgress(true, user.id)
+                                usersAPI.followUser(user.id)
+                                .then(data => {
+                                    if(data.resultCode === 0) {
+                                        props.follow(user.id)
+                                    }
+                                    props.toggleFollowingProgress(false, user.id)
+                                    })
+                            }}>Follow</button>}
+                    </div>
                 </div>
                 <div className={classes.userInfoWrp}>
                     <div className={classes.userName}>{user.name}</div>
