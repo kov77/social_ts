@@ -2,7 +2,6 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user_avatar.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 const Users = (props: any) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -28,28 +27,8 @@ const Users = (props: any) => {
                     </div>
                     <div>
                         {user.followed
-                            ? <button disabled={props.followingInProgress.some((id:number) => id === user.id)} onClick={() => {
-                                console.log(user)
-                                props.toggleFollowingProgress(true, user.id)
-                                usersAPI.unfollowUser(user.id).then(data => {
-                                if(data.resultCode === 0) {
-
-                                    props.unfollow(user.id);
-                                }
-                                props.toggleFollowingProgress(false, user.id)
-
-                            })
-                            }}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some((id:number) => id === user.id)}  onClick={() => {
-                                props.toggleFollowingProgress(true, user.id)
-                                usersAPI.followUser(user.id)
-                                .then(data => {
-                                    if(data.resultCode === 0) {
-                                        props.follow(user.id)
-                                    }
-                                    props.toggleFollowingProgress(false, user.id)
-                                    })
-                            }}>Follow</button>}
+                            ? <button disabled={props.followingInProgress.some((id:number) => id === user.id)} onClick={() => {props.follow( user.id)}}>Unfollow</button>
+                            : <button disabled={props.followingInProgress.some((id:number) => id === user.id)} onClick={() => {props.unfollow(user.id)}}>Follow</button>}
                     </div>
                 </div>
                 <div className={classes.userInfoWrp}>

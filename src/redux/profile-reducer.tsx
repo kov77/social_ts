@@ -1,3 +1,4 @@
+import {usersAPI} from "../api/api";
 
 const initialState = {
     postData: [
@@ -35,3 +36,8 @@ export const profileReducer = (state = initialState, action: profileReducerType 
 export const addPostActionCreator = (value: string) => ({type: "ADD-POST", value} as const)
 export const changePostTexttActionCreator = (postValue: string) => ({type: "CHANGE-POST-TEXT", value: postValue} as const)
 export const setUserProfile = (profile: any) => ({type: "SET-USER-PROFILE", profile} as const)
+export const getUserProfile = (userId: string) => (dispatch: any) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
+}
