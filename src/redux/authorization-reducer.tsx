@@ -22,7 +22,7 @@ export const authorizationReducer = (state = initialState, action: authACType) =
 }
 
 export const setAutorizationInfoAC = (data: initialStateType) => ({type: "SET_USER_DATA", data}as const)
-export const getAutorizationInfoTC = (data: initialStateType) => (dispatch: any) => {
+export const getAutorizationInfoTC = () => (dispatch: any) => {
     authAPI.authUser()
         .then(response => {
             if (response.data.resultCode === 0) {
