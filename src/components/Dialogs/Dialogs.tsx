@@ -24,6 +24,7 @@ export type dialogsPropsType = {
 }
 
 const Dialogs = (props: dialogsPropsType) => {
+    debugger
 
     let textFromArea: any = React.createRef();
 
