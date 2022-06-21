@@ -39,19 +39,19 @@ const Dialogs = (props: dialogsPropsType) => {
 
     const dialogsElement = props.dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
     const messagesElement = props.messages.map(el => <Message key={el.id}  message={el.message}/>)
-            if (!props.isAuth) return <Navigate to={'/login'}/>
+    if (!props.isAuth) return <Navigate to={'/login'}/>
 
 
-                return (
-                    <div className={classes.dialogs}>
-                        <div className={classes.dialogsItems}>{dialogsElement}</div>
-                        <div className={classes.messages}>{messagesElement}</div>
-                        <div className={classes.addMessage}>
-                            <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
-                            <button onClick={onClickHandler}>Add text</button>
-                        </div>
-                    </div>
-                )
+    return (
+        <div className={classes.dialogs}>
+            <div className={classes.dialogsItems}>{dialogsElement}</div>
+            <div className={classes.messages}>{messagesElement}</div>
+            <div className={classes.addMessage}>
+                <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
+                <button onClick={onClickHandler}>Add text</button>
+            </div>
+        </div>
+    )
 
 
 }
