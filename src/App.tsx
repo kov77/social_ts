@@ -9,7 +9,8 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 
 
-const App = (props: any) => {
+const App = () => {
+
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -17,8 +18,8 @@ const App = (props: any) => {
                 <Sidebar/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path='/profile/*' element={<ProfileContainer store={props.store}/>}/>
-                        <Route path='/dialogs/*' element={<DialogsContainer store={props.store}/>}/>
+                        <Route path='/profile/*' element={<ProfileContainer />}/>
+                        <Route path='/dialogs/*' element={<DialogsContainer />}/>
                         <Route path='/users/*' element={<UsersContainer/>}/>
                         <Route path='/news/*' element={'News'}/>
                         <Route path='/music/*' element={'Music'}/>

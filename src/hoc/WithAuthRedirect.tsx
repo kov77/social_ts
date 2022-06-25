@@ -17,7 +17,6 @@ export function WithAuthRedirect<T>(Component: ComponentType<T>) {
     function RedirectComponent(props: any) {
 
         let{isAuth, ...restProps} = props
-        debugger
         if (!isAuth) return <Navigate to={'/login'}/>
 
         return <Component {...restProps as T} />

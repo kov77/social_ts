@@ -4,6 +4,7 @@ import React from "react";
 import {Navigate, NavLink} from "react-router-dom";
 
 const Users = (props: any) => {
+    debugger
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
