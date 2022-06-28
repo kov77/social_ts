@@ -24,7 +24,6 @@ export type dialogsPropsType = {
 }
 
 const Dialogs = (props: dialogsPropsType) => {
-    debugger
 
     let textFromArea: any = React.createRef();
 
@@ -40,7 +39,6 @@ const Dialogs = (props: dialogsPropsType) => {
 
     const dialogsElement = props.dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
     const messagesElement = props.messages.map(el => <Message key={el.id}  message={el.message}/>)
-    if (!props.isAuth) return <Navigate to={'/login'}/>
 
 
     return (

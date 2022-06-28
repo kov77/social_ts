@@ -7,12 +7,10 @@ import { AppStateType } from "../../redux/redux-store";
 import {compose} from "redux";
 
 const mapStateToProps = (state: AppStateType) => {
-    debugger
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         messageText: state.dialogsPage.messageText,
-        // isAuth: state.authorization.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: any) => {

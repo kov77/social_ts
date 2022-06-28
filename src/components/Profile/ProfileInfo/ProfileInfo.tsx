@@ -2,21 +2,26 @@ import React from "react";
 import {Preloader} from "../../Preloader";
 import jobSeekerImg from "../../../assets/images/job_seeker.jpeg";
 import classes from "./ProfileInfo.module.css"
+import {ProfileStatus} from "./ProfileStatus";
 
 const ProfileInfo = (props: any) => {
     if (!props.userProfile) {
         return <Preloader/>
     } else {
         return <div>
-            <div><img
+            <div>
+                <img
                 src="https://www.internetmatters.org/wp-content/uploads/2019/01/Social-media-parental-control-image.png"
-                alt="main-image"/></div>
+                alt="main-image"/>
+            </div>
+
             <div>
                 <div className={classes.avatarWrp}><img
                     src={props.userProfile.photos && props.userProfile.photos.large ? props.userProfile.photos.large : "https://image.yaksgames.com/v2/game/1/b/e/1bea6ab4172dc93bdb45ca9cace13b93.png"}
                     alt="avatar"/>
                     {props.userProfile.lookingForAJob && <div className={classes.jobSeekerWrp}><img className={classes.jobSeeker} src={jobSeekerImg} alt="jobSeekerImg"/></div>}
                     {props.userProfile.lookingForAJobDescription && <div className={classes.jobSeekerDescr}>{props.userProfile.lookingForAJobDescription}</div>}
+                    <ProfileStatus status={"hello gays"}/>
                 </div>
                 {props.userProfile.fullName && <div className={classes.userFullName}>{props.userProfile.fullName}</div>}
                 {props.userProfile.contacts && <div className={classes.contacts}>
