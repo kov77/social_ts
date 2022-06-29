@@ -8,13 +8,15 @@ const initialState = {
         {id: 4, message: 'It"s my third post!', likesCount: 12},
     ],
     newPostText: 'hello beaches',
-    userProfile: {}
+    userProfile: {},
+    status: 'status'
 }
 
-type profileReducerType = addPostActionType | achangePostTexttActionType | setUserProfileAction
+type profileReducerType = addPostActionType | achangePostTexttActionType | setUserProfileAction | setStatusAction
 type addPostActionType = ReturnType<typeof addPostActionCreator>
 type achangePostTexttActionType = ReturnType<typeof changePostTexttActionCreator>
 type setUserProfileAction = ReturnType<typeof setUserProfile>
+type setStatusAction = ReturnType<typeof setStatus>
 
 export const profileReducer = (state = initialState, action: profileReducerType ) => {
 
@@ -28,6 +30,8 @@ export const profileReducer = (state = initialState, action: profileReducerType 
         }
         case "SET-USER-PROFILE":
             return {...state, userProfile: action.profile}
+        case "SET-STATUS":
+            return {...state, status: action.status}
         default: return state
     }
 
@@ -39,5 +43,20 @@ export const setUserProfile = (profile: any) => ({type: "SET-USER-PROFILE", prof
 export const getUserProfile = (userId: string) => (dispatch: any) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data))
+    })
+}
+export const setStatus = (status: any) => ({type: "SET-STATUS", status} as const)
+
+export const getStatus = (userId: string) => (dispatch: any) => {
+    usersAPI.getStatus(userId).then(response => {
+        dispatch(setStatus(response.data))
+    })
+}
+
+export const updateStatus = (status: string) => (dispatch: any) => {
+    usersAPI.updateStatus(status).then(response => {
+        if(response.data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     })
 }

@@ -5,6 +5,7 @@ import classes from "./ProfileInfo.module.css"
 import {ProfileStatus} from "./ProfileStatus";
 
 const ProfileInfo = (props: any) => {
+
     if (!props.userProfile) {
         return <Preloader/>
     } else {
@@ -21,7 +22,7 @@ const ProfileInfo = (props: any) => {
                     alt="avatar"/>
                     {props.userProfile.lookingForAJob && <div className={classes.jobSeekerWrp}><img className={classes.jobSeeker} src={jobSeekerImg} alt="jobSeekerImg"/></div>}
                     {props.userProfile.lookingForAJobDescription && <div className={classes.jobSeekerDescr}>{props.userProfile.lookingForAJobDescription}</div>}
-                    <ProfileStatus status={"hello gays"}/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
                 {props.userProfile.fullName && <div className={classes.userFullName}>{props.userProfile.fullName}</div>}
                 {props.userProfile.contacts && <div className={classes.contacts}>
