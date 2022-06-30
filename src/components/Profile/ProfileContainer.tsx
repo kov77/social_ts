@@ -12,8 +12,7 @@ import { compose } from "redux";
 
 class ProfileContainer extends React.Component<any, any>{
     componentDidMount() {
-        let userId = this.props.router.params["*"];
-
+        let userId = this.props.router.params["*"] === "" ? "23587" : this.props.router.params["*"];
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }

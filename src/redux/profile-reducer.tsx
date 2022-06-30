@@ -9,7 +9,7 @@ const initialState = {
     ],
     newPostText: 'hello beaches',
     userProfile: {},
-    status: 'status'
+    status: ''
 }
 
 type profileReducerType = addPostActionType | achangePostTexttActionType | setUserProfileAction | setStatusAction
@@ -45,8 +45,7 @@ export const getUserProfile = (userId: string) => (dispatch: any) => {
         dispatch(setUserProfile(response.data))
     })
 }
-export const setStatus = (status: any) => ({type: "SET-STATUS", status} as const)
-
+export const setStatus = (status: any) =>  ({type: "SET-STATUS", status} as const)
 export const getStatus = (userId: string) => (dispatch: any) => {
     usersAPI.getStatus(userId).then(response => {
         dispatch(setStatus(response.data))
