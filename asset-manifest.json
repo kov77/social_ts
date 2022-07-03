@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/kov77/social_ts/static/css/main.01db9e7a.css",
+    "main.js": "/kov77/social_ts/static/js/main.48f33cec.js",
+    "static/media/user_avatar.png": "/kov77/social_ts/static/media/user_avatar.e77a44253893d48ea849.png",
+    "static/media/job_seeker.jpeg": "/kov77/social_ts/static/media/job_seeker.1af8d9f0a9667e6e35b5.jpeg",
+    "index.html": "/kov77/social_ts/index.html",
+    "main.01db9e7a.css.map": "/kov77/social_ts/static/css/main.01db9e7a.css.map",
+    "main.48f33cec.js.map": "/kov77/social_ts/static/js/main.48f33cec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01db9e7a.css",
+    "static/js/main.48f33cec.js"
+  ]
+}
