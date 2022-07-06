@@ -7,14 +7,12 @@ const initialState = {
         {id: 3, message: 'It"s my second post!', likesCount: 12},
         {id: 4, message: 'It"s my third post!', likesCount: 12},
     ],
-    newPostText: 'hello beaches',
     userProfile: {},
     status: ''
 }
 
-type profileReducerType = addPostActionType | achangePostTexttActionType | setUserProfileAction | setStatusAction
+type profileReducerType = addPostActionType | setUserProfileAction | setStatusAction
 type addPostActionType = ReturnType<typeof addPostActionCreator>
-type achangePostTexttActionType = ReturnType<typeof changePostTexttActionCreator>
 type setUserProfileAction = ReturnType<typeof setUserProfile>
 type setStatusAction = ReturnType<typeof setStatus>
 
@@ -22,11 +20,8 @@ export const profileReducer = (state = initialState, action: profileReducerType 
 
     switch (action.type) {
         case "ADD-POST": {
-            let newPost = {id: state.postData.length + 1, message: state.newPostText, likesCount: 0}
-            return {...state, postData: [...state.postData, newPost], newPostText: ''}
-        }
-        case "CHANGE-POST-TEXT": {
-            return {...state, newPostText: action.value}
+            let newPost = {id: state.postData.length + 1, message: action.value, likesCount: 0}
+            return {...state, postData: [...state.postData, newPost]}
         }
         case "SET-USER-PROFILE":
             return {...state, userProfile: action.profile}
@@ -38,7 +33,6 @@ export const profileReducer = (state = initialState, action: profileReducerType 
 }
 
 export const addPostActionCreator = (value: string) => ({type: "ADD-POST", value} as const)
-export const changePostTexttActionCreator = (postValue: string) => ({type: "CHANGE-POST-TEXT", value: postValue} as const)
 export const setUserProfile = (profile: any) => ({type: "SET-USER-PROFILE", profile} as const)
 export const getUserProfile = (userId: string) => (dispatch: any) => {
     usersAPI.getProfile(userId).then(response => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import {connect} from "react-redux";
 
 type FormDataType = {
     login: string
@@ -25,7 +26,6 @@ const LoginReduxForm = reduxForm<FormDataType>({
 
 const Login = () => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
     }
     return <div>
         <h1>Login</h1>

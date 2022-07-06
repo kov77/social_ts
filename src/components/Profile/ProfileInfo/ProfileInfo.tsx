@@ -1,5 +1,5 @@
 import React from "react";
-import {Preloader} from "../../Preloader";
+import {Preloader} from "../../common/Preloader";
 import jobSeekerImg from "../../../assets/images/job_seeker.jpeg";
 import classes from "./ProfileInfo.module.css"
 import {ProfileStatus} from "./ProfileStatus";

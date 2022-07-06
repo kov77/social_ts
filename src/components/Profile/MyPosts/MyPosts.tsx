@@ -1,21 +1,13 @@
-import classes from './MyPosts.module.css';
-import React, {ChangeEvent} from "react";
+import React from "react";
 import Post from "./Post/Post";
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLength, minLength, required } from '../../../utils/valirators';
+import {TextArea} from "../../common/FormControl/FormsControl";
 
 export type myPostPropsType = {
     addPost: (newValue: string) => void
-    updateNewPostText: (postValue: string) => void
-    removeBtn: () => void
     postData: postDataArr[]
-    newPostText: string
 }
-
-// export type myPostPropsType = {
-//     postData: postDataArr[]
-//     addPost: () => void
-//     newPostText: string
-//     changPostText: (value: string) => void
-// }
 
 type postDataArr = {
     id: number
@@ -23,34 +15,28 @@ type postDataArr = {
     likesCount: number
 }
 
+const maxLength30 = maxLength(30)
+const minLength2 = minLength(2)
+
+const PostForm = (props:InjectedFormProps) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field component={TextArea} name={"profilePost"} validate={[required, maxLength30, minLength2]}></Field>
+        <button>ADD POST</button>
+    </form>
+}
+
+const PostReduxForm = reduxForm({form: 'profilePost'})(PostForm)
+
 
 
 const MyPosts = (props: myPostPropsType) => {
 
-    const newPostElement: any = React.createRef()
-
-    const onClickBtnHandler = () => {
-        let newValue = newPostElement.current.value
-        props.addPost(newValue)
-        value: newPostElement.current.value = ''
+    const onSubmit = (data: any) => {
+        props.addPost(data.profilePost)
     }
-
-    const newPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let postValue = e.currentTarget.value
-        props.updateNewPostText(postValue)
-    }
-
-    const removeBtnHandler = () => props.removeBtn()
-
     return (
         <div>
-            <div>
-                <div>
-                    <textarea onChange={newPostTextHandler} ref={newPostElement} value={props.newPostText}></textarea>
-                    <button onClick={onClickBtnHandler}>ADD POST</button>
-                    <button onClick={removeBtnHandler}>REMOVE POST</button>
-                </div>
-            </div>
+            <PostReduxForm onSubmit={onSubmit}/>
             {props.postData.map((el, index) => <Post key={index} message={el.message} likesCount={el.likesCount}/>)}
         </div>
     )

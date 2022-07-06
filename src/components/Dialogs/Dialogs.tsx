@@ -3,6 +3,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import React, {ChangeEvent} from "react";
 import { Navigate } from 'react-router-dom';
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type dialogsArr = {
     id: string
@@ -23,19 +24,22 @@ export type dialogsPropsType = {
     isAuth: boolean
 }
 
+const DialogForm = (props:InjectedFormProps) => {
+    return <form onSubmit={props.handleSubmit} className={classes.addMessage}>
+        <Field component={"textarea"} name={"message"} ></Field>
+
+        <button>Add text</button>
+    </form>
+}
+
+const DialogReduxForm = reduxForm({form: "dialog"})(DialogForm)
+
+
 const Dialogs = (props: dialogsPropsType) => {
 
-    let textFromArea: any = React.createRef();
-
-    const onClickHandler = () => {
-        let text = props.messageText
-        props.addMessage(text)    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newValue = e.currentTarget.value
-        props.changeDialogsText(newValue)
+    const onSubmit = (data: any) => {
+        props.addMessage(data.message)
     }
-
 
     const dialogsElement = props.dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
     const messagesElement = props.messages.map(el => <Message key={el.id}  message={el.message}/>)
@@ -45,10 +49,7 @@ const Dialogs = (props: dialogsPropsType) => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>{dialogsElement}</div>
             <div className={classes.messages}>{messagesElement}</div>
-            <div className={classes.addMessage}>
-                <textarea onChange={onChangeHandler} ref={textFromArea} value={props.messageText}></textarea>
-                <button onClick={onClickHandler}>Add text</button>
-            </div>
+            <DialogReduxForm onSubmit={onSubmit}/>
         </div>
     )
 
