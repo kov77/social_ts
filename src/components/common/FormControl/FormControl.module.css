@@ -1,16 +1,16 @@
 .formControl {
 
 }
-
 .formControl .error input,
 .error textarea
 {
-    border: 1px solid red;
+    border: 2px solid red;
+    outline: none;
 }
 
-.formControl .error span
-{
-    color: red
+.formControl .error {
+    color: red;
+    font-size: 14px;
 }
 
 

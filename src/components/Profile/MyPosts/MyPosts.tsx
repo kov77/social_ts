@@ -2,7 +2,8 @@ import React from "react";
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLength, minLength, required } from '../../../utils/valirators';
-import {TextArea} from "../../common/FormControl/FormsControl";
+import {multiAttribute} from "../../common/FormControl/FormsControl";
+// import {TextArea} from "../../common/FormControl/FormsControl";
 
 export type myPostPropsType = {
     addPost: (newValue: string) => void
@@ -20,7 +21,7 @@ const minLength2 = minLength(2)
 
 const PostForm = (props:InjectedFormProps) => {
     return <form onSubmit={props.handleSubmit}>
-        <Field component={TextArea} name={"profilePost"} validate={[required, maxLength30, minLength2]}></Field>
+        <Field component={multiAttribute('textarea')} name={"profilePost"} validate={[required, maxLength30, minLength2]}></Field>
         <button>ADD POST</button>
     </form>
 }

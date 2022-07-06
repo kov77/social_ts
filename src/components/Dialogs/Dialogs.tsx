@@ -1,9 +1,11 @@
 import classes from '././Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import React, {ChangeEvent} from "react";
-import { Navigate } from 'react-router-dom';
+import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+// import {TextArea} from "../common/FormControl/FormsControl";
+import {maxLength, minLength, required} from "../../utils/valirators";
+import {multiAttribute} from "../common/FormControl/FormsControl";
 
 type dialogsArr = {
     id: string
@@ -24,9 +26,12 @@ export type dialogsPropsType = {
     isAuth: boolean
 }
 
+const maxLength50 = maxLength(50)
+const minLength2 = minLength(2)
+
 const DialogForm = (props:InjectedFormProps) => {
     return <form onSubmit={props.handleSubmit} className={classes.addMessage}>
-        <Field component={"textarea"} name={"message"} ></Field>
+        <Field component={multiAttribute('textarea')} validate={[required, maxLength50, minLength2]} name={"message"} ></Field>
 
         <button>Add text</button>
     </form>
