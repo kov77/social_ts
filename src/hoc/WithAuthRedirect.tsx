@@ -7,7 +7,7 @@ type MapStatePropsType = {
     isAuth: boolean
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+const mapStateToProps = (state: any): MapStatePropsType => {
     return {
         isAuth: state.authorization.isAuth
     }
