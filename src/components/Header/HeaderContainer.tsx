@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {getAutorizationInfoTC} from "../../redux/authorization-reducer";
+import {getAutorizationInfoTC, logout} from "../../redux/authorization-reducer";
 
 class HeaderContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -17,4 +17,4 @@ class HeaderContainer extends React.Component<any, any> {
 let mapStateToProps = (state: AppStateType) => ({
     authorizationData: state.authorization
 })
-export default connect(mapStateToProps, {getAutorizationInfoTC})(HeaderContainer)
+export default connect(mapStateToProps, {getAutorizationInfoTC, logout})(HeaderContainer)
